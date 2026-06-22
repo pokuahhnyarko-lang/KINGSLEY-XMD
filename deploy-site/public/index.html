@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>KINGSLEY-XMD | Deploy Bot</title>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{background:#0d1117;color:#e6edf3;font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh}
+    header{background:#161b22;border-bottom:1px solid #30363d;padding:1rem 2rem;display:flex;align-items:center;gap:1rem}
+    header h1{font-size:1.4rem;font-weight:700;background:linear-gradient(135deg,#25d366,#128c7e);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+    .container{max-width:1100px;margin:0 auto;padding:2rem}
+    .hero{text-align:center;padding:3rem 1rem}
+    .hero h2{font-size:2.2rem;font-weight:700;margin-bottom:1rem}
+    .hero p{color:#8b949e;font-size:1.05rem;max-width:600px;margin:0 auto 2rem}
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem;margin-top:2rem}
+    .card{background:#161b22;border:1px solid #30363d;border-radius:14px;padding:1.8rem;transition:border .2s,transform .2s}
+    .card:hover{border-color:#25d366;transform:translateY(-3px)}
+    .platform-icon{font-size:2.5rem;margin-bottom:1rem}
+    .card h3{font-size:1.2rem;font-weight:600;margin-bottom:.5rem}
+    .card p{color:#8b949e;font-size:.88rem;margin-bottom:1.3rem;line-height:1.5}
+    .btn{display:inline-block;padding:.7rem 1.4rem;border-radius:8px;font-weight:600;font-size:.9rem;text-decoration:none;transition:all .2s;cursor:pointer;border:none}
+    .btn-deploy{background:linear-gradient(135deg,#25d366,#128c7e);color:#000}
+    .btn-deploy:hover{opacity:.9;transform:translateY(-1px)}
+    .badge{display:inline-block;padding:.2rem .6rem;border-radius:999px;font-size:.72rem;font-weight:600;margin-left:.5rem;vertical-align:middle}
+    .badge-free{background:#0d2818;color:#25d366;border:1px solid #25d366}
+    .badge-paid{background:#1a1200;color:#f0a500;border:1px solid #f0a500}
+    .steps-section{margin-top:3rem}
+    .steps-section h2{font-size:1.4rem;font-weight:700;margin-bottom:1.5rem;text-align:center}
+    .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem}
+    .step{background:#161b22;border:1px solid #30363d;border-radius:12px;padding:1.2rem;text-align:center}
+    .step-num{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,#25d366,#128c7e);color:#000;font-weight:700;display:flex;align-items:center;justify-content:center;margin:0 auto .8rem}
+    .step h4{font-size:.92rem;margin-bottom:.4rem}
+    .step p{font-size:.8rem;color:#8b949e}
+    footer{text-align:center;padding:2rem;color:#484f58;font-size:.85rem;border-top:1px solid #21262d;margin-top:3rem}
+  </style>
+</head>
+<body>
+<header>
+  <span style="font-size:1.5rem">🤖</span>
+  <h1>KINGSLEY-XMD Deploy</h1>
+</header>
+<div class="container">
+  <div class="hero">
+    <h2>Deploy Your WhatsApp Bot</h2>
+    <p>Get KINGSLEY-XMD running 24/7 on your preferred cloud platform. Free and paid options available.</p>
+    <a class="btn btn-deploy" href="/pair" style="margin-right:.5rem">🔗 Get Session ID First</a>
+    <a class="btn" style="background:#21262d;color:#e6edf3" href="https://github.com/Pokuahhnyarko-lang/KINGSLEY-XMD" target="_blank">⭐ Star on GitHub</a>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <div class="platform-icon">🚀</div>
+      <h3>Render <span class="badge badge-free">FREE</span></h3>
+      <p>Easy deployment with free tier. Auto-deploys from GitHub. Sleeps after inactivity on free plan.</p>
+      <a class="btn btn-deploy" href="https://render.com/deploy?repo=https://github.com/Pokuahhnyarko-lang/KINGSLEY-XMD" target="_blank">Deploy to Render</a>
+    </div>
+    <div class="card">
+      <div class="platform-icon">🛤️</div>
+      <h3>Railway <span class="badge badge-free">FREE</span></h3>
+      <p>$5 free credits monthly. Persistent containers, no sleep. Best free option for always-on bots.</p>
+      <a class="btn btn-deploy" href="https://railway.app/new/template?template=https://github.com/Pokuahhnyarko-lang/KINGSLEY-XMD" target="_blank">Deploy to Railway</a>
+    </div>
+    <div class="card">
+      <div class="platform-icon">🟣</div>
+      <h3>Heroku <span class="badge badge-paid">PAID</span></h3>
+      <p>Reliable platform with easy GitHub integration. Starting at $5/month for Eco dynos.</p>
+      <a class="btn btn-deploy" href="https://heroku.com/deploy?template=https://github.com/Pokuahhnyarko-lang/KINGSLEY-XMD" target="_blank">Deploy to Heroku</a>
+    </div>
+    <div class="card">
+      <div class="platform-icon">🌐</div>
+      <h3>Netlify <span class="badge badge-free">FREE</span></h3>
+      <p>Best for the pair/deploy site (static hosting). Use Netlify Functions for lightweight API.</p>
+      <a class="btn btn-deploy" href="https://app.netlify.com/start/deploy?repository=https://github.com/Pokuahhnyarko-lang/KINGSLEY-XMD" target="_blank">Deploy to Netlify</a>
+    </div>
+    <div class="card">
+      <div class="platform-icon">⚡</div>
+      <h3>Katabump <span class="badge badge-free">FREE</span></h3>
+      <p>Simple cloud hosting platform for Node.js apps. Good for lightweight bot deployments.</p>
+      <a class="btn btn-deploy" href="https://github.com/Pokuahhnyarko-lang/KINGSLEY-XMD" target="_blank">View Setup Guide</a>
+    </div>
+  </div>
+
+  <div class="steps-section">
+    <h2>📋 How to Deploy</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h4>Get Session ID</h4>
+        <p>Visit the <a href="/pair" style="color:#25d366">Pair Site</a> and link your WhatsApp</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h4>Fork the Repo</h4>
+        <p>Fork <a href="https://github.com/Pokuahhnyarko-lang/KINGSLEY-XMD" style="color:#25d366" target="_blank">KINGSLEY-XMD</a> to your GitHub account</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h4>Set Variables</h4>
+        <p>Add SESSION_ID, OWNER_NUMBER and other env vars in your platform settings</p>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <h4>Click Deploy</h4>
+        <p>Hit the deploy button above for your chosen platform</p>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <h4>Enjoy!</h4>
+        <p>Your bot is now live 24/7. Message it on WhatsApp to test</p>
+      </div>
+    </div>
+  </div>
+</div>
+<footer>© 2024 KINGSLEY-XMD • Made with ❤️ • <a href="https://github.com/Pokuahhnyarko-lang/KINGSLEY-XMD" target="_blank" style="color:#25d366">GitHub</a></footer>
+</body>
+</html>

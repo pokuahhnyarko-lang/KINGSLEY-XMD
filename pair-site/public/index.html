@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>KINGSLEY-XMD | Pair Your Bot</title>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{background:#0d1117;color:#e6edf3;font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center}
+    .card{background:#161b22;border:1px solid #30363d;border-radius:16px;padding:2.5rem;max-width:480px;width:90%;text-align:center}
+    .logo{font-size:3rem;margin-bottom:1rem}
+    h1{font-size:1.8rem;font-weight:700;background:linear-gradient(135deg,#25d366,#128c7e);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:.5rem}
+    p.sub{color:#8b949e;font-size:.95rem;margin-bottom:2rem}
+    .input-group{position:relative;margin-bottom:1.2rem}
+    .input-group input{width:100%;padding:.85rem 1rem;border-radius:10px;border:1px solid #30363d;background:#0d1117;color:#e6edf3;font-size:1rem;outline:none;transition:border .2s}
+    .input-group input:focus{border-color:#25d366}
+    .input-group input::placeholder{color:#484f58}
+    .btn{width:100%;padding:.9rem;border-radius:10px;border:none;font-size:1rem;font-weight:600;cursor:pointer;transition:all .2s}
+    .btn-green{background:linear-gradient(135deg,#25d366,#128c7e);color:#000}
+    .btn-green:hover{opacity:.9;transform:translateY(-1px)}
+    .btn-green:disabled{opacity:.5;cursor:not-allowed;transform:none}
+    .code-box{background:#0d1117;border:2px dashed #25d366;border-radius:12px;padding:1.5rem;margin:1.5rem 0;display:none}
+    .code-box .code{font-size:2.5rem;font-weight:700;letter-spacing:6px;color:#25d366;font-family:monospace}
+    .code-box p{color:#8b949e;font-size:.85rem;margin-top:.5rem}
+    .session-box{background:#0d1117;border:1px solid #30363d;border-radius:10px;padding:1rem;margin-top:1.5rem;display:none;word-break:break-all}
+    .session-box label{font-size:.78rem;color:#8b949e;display:block;margin-bottom:.4rem}
+    .session-box textarea{width:100%;background:transparent;border:none;color:#25d366;font-size:.7rem;font-family:monospace;resize:none;outline:none;height:80px}
+    .copy-btn{margin-top:.5rem;padding:.5rem 1rem;border-radius:6px;border:1px solid #30363d;background:#161b22;color:#e6edf3;cursor:pointer;font-size:.85rem}
+    .copy-btn:hover{background:#21262d}
+    .steps{text-align:left;margin:1.5rem 0;background:#0d1117;border-radius:10px;padding:1rem}
+    .step{display:flex;gap:.75rem;align-items:flex-start;margin-bottom:.75rem;color:#8b949e;font-size:.88rem}
+    .step:last-child{margin-bottom:0}
+    .step-num{background:#25d366;color:#000;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.78rem;flex-shrink:0}
+    .alert{padding:.75rem 1rem;border-radius:8px;font-size:.88rem;margin-bottom:1rem;display:none}
+    .alert-err{background:#2d1b1b;border:1px solid #f85149;color:#f85149}
+    .status-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#25d366;margin-right:.4rem;animation:pulse 2s infinite}
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+  </style>
+</head>
+<body>
+<div class="card">
+  <div class="logo">🤖</div>
+  <h1>KINGSLEY-XMD</h1>
+  <p class="sub">Pair your WhatsApp to get a session ID for bot deployment</p>
+
+  <div class="alert alert-err" id="errAlert"></div>
+
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><span>Enter your WhatsApp number with country code</span></div>
+    <div class="step"><div class="step-num">2</div><span>Enter the pairing code shown on WhatsApp → Linked Devices → Link with phone number</span></div>
+    <div class="step"><div class="step-num">3</div><span>Copy your Session ID and paste it in your deployment</span></div>
+  </div>
+
+  <div class="input-group">
+    <input type="tel" id="phoneInput" placeholder="Phone number e.g. 2348012345678" />
+  </div>
+
+  <button class="btn btn-green" id="pairBtn" onclick="pairDevice()">🔗 Generate Pairing Code</button>
+
+  <div class="code-box" id="codeBox">
+    <div class="code" id="pairCode">----</div>
+    <p>Enter this code in WhatsApp → Linked Devices → Link with phone number</p>
+    <p style="margin-top:.5rem;color:#25d366"><span class="status-dot"></span>Waiting for confirmation...</p>
+  </div>
+
+  <div class="session-box" id="sessionBox">
+    <label>✅ Your Session ID — copy and save this!</label>
+    <textarea id="sessionText" readonly></textarea>
+    <button class="copy-btn" onclick="copySession()">📋 Copy Session ID</button>
+  </div>
+</div>
+
+<script>
+  let phone = '';
+  let pollInterval = null;
+
+  async function pairDevice() {
+    const input = document.getElementById('phoneInput').value.trim();
+    if (!input) return showError('Please enter your phone number');
+    phone = input.replace(/\D/g,'');
+    if (phone.length < 10) return showError('Please enter a valid phone number with country code');
+
+    const btn = document.getElementById('pairBtn');
+    btn.disabled = true;
+    btn.textContent = '⏳ Generating...';
+    hideError();
+
+    try {
+      const res = await fetch('/pair', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({ phone })
+      });
+      const data = await res.json();
+      if (data.error) return showError(data.error);
+
+      if (data.code) {
+        document.getElementById('pairCode').textContent = data.code;
+        document.getElementById('codeBox').style.display = 'block';
+        btn.textContent = '⏳ Waiting for WhatsApp...';
+        startPolling();
+      }
+    } catch (err) {
+      showError('Failed to connect. Please try again.');
+      btn.disabled = false;
+      btn.textContent = '🔗 Generate Pairing Code';
+    }
+  }
+
+  function startPolling() {
+    pollInterval = setInterval(async () => {
+      try {
+        const res = await fetch(`/session/${phone}`);
+        const data = await res.json();
+        if (data.ready) {
+          clearInterval(pollInterval);
+          document.getElementById('sessionText').value = data.sessionId;
+          document.getElementById('sessionBox').style.display = 'block';
+          document.getElementById('pairBtn').textContent = '✅ Session Ready!';
+          document.getElementById('codeBox').style.display = 'none';
+        }
+      } catch {}
+    }, 3000);
+  }
+
+  function copySession() {
+    const text = document.getElementById('sessionText').value;
+    navigator.clipboard.writeText(text).then(() => {
+      document.querySelector('.copy-btn').textContent = '✅ Copied!';
+      setTimeout(() => document.querySelector('.copy-btn').textContent = '📋 Copy Session ID', 2000);
+    });
+  }
+
+  function showError(msg) {
+    const el = document.getElementById('errAlert');
+    el.textContent = msg;
+    el.style.display = 'block';
+    document.getElementById('pairBtn').disabled = false;
+    document.getElementById('pairBtn').textContent = '🔗 Generate Pairing Code';
+  }
+
+  function hideError() {
+    document.getElementById('errAlert').style.display = 'none';
+  }
+</script>
+</body>
+</html>
