@@ -1,1 +1,2 @@
-web: node src/index.js
+web: node pair.js
+worker: node index.js
