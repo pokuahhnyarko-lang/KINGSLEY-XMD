@@ -1,0 +1,56 @@
+{
+  "name": "KINGSLEY-XMD",
+  "description": "Advanced WhatsApp Bot powered by Baileys",
+  "repository": "https://github.com/Pokuahhnyarko-lang/KINGSLEY-XMD",
+  "logo": "https://i.imgur.com/xxxxxx.png",
+  "keywords": ["whatsapp", "bot", "baileys", "nodejs"],
+  "env": {
+    "SESSION_ID": {
+      "description": "Your WhatsApp session ID (from pair site)",
+      "required": true
+    },
+    "OWNER_NUMBER": {
+      "description": "Your WhatsApp number with country code (e.g. 2348012345678)",
+      "required": true
+    },
+    "BOT_NAME": {
+      "description": "Name of your bot",
+      "value": "KINGSLEY-XMD"
+    },
+    "PREFIX": {
+      "description": "Command prefix",
+      "value": "."
+    },
+    "TIMEZONE": {
+      "description": "Your timezone (e.g. Africa/Lagos)",
+      "value": "Africa/Lagos"
+    },
+    "AUTO_READ": {
+      "description": "Auto read messages",
+      "value": "true"
+    },
+    "AUTO_TYPING": {
+      "description": "Show typing indicator",
+      "value": "true"
+    },
+    "ANTI_SPAM": {
+      "description": "Enable anti-spam",
+      "value": "true"
+    },
+    "WARN_COUNT": {
+      "description": "Number of warns before kick",
+      "value": "3"
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "eco"
+    }
+  },
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ]
+}
