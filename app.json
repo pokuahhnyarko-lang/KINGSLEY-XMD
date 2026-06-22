@@ -1,51 +1,43 @@
 {
   "name": "KINGSLEY-XMD",
   "description": "Advanced WhatsApp Bot powered by Baileys",
-  "repository": "https://github.com/Pokuahhnyarko-lang/KINGSLEY-XMD",
-  "logo": "https://i.imgur.com/xxxxxx.png",
-  "keywords": ["whatsapp", "bot", "baileys", "nodejs"],
+  "repository": "https://github.com/KINGSLEY-XMD/KINGSLEY-XMD",
+  "logo": "https://raw.githubusercontent.com/KINGSLEY-XMD/KINGSLEY-XMD/main/assets/logo.png",
+  "keywords": ["whatsapp", "bot", "baileys"],
   "env": {
     "SESSION_ID": {
-      "description": "Your WhatsApp session ID (from pair site)",
-      "required": true
+      "description": "WhatsApp session ID from pair site",
+      "required": false
     },
     "OWNER_NUMBER": {
-      "description": "Your WhatsApp number with country code (e.g. 2348012345678)",
+      "description": "Your WhatsApp number without + (e.g. 2348012345678)",
       "required": true
     },
-    "BOT_NAME": {
-      "description": "Name of your bot",
-      "value": "KINGSLEY-XMD"
-    },
     "PREFIX": {
-      "description": "Command prefix",
-      "value": "."
+      "description": "Bot command prefix",
+      "value": ".",
+      "required": false
+    },
+    "BOT_NAME": {
+      "description": "Bot display name",
+      "value": "KINGSLEY-XMD",
+      "required": false
+    },
+    "BOT_MODE": {
+      "description": "public or private",
+      "value": "public",
+      "required": false
     },
     "TIMEZONE": {
-      "description": "Your timezone (e.g. Africa/Lagos)",
-      "value": "Africa/Lagos"
-    },
-    "AUTO_READ": {
-      "description": "Auto read messages",
-      "value": "true"
-    },
-    "AUTO_TYPING": {
-      "description": "Show typing indicator",
-      "value": "true"
-    },
-    "ANTI_SPAM": {
-      "description": "Enable anti-spam",
-      "value": "true"
-    },
-    "WARN_COUNT": {
-      "description": "Number of warns before kick",
-      "value": "3"
+      "description": "Your timezone",
+      "value": "Africa/Lagos",
+      "required": false
     }
   },
   "formation": {
     "web": {
       "quantity": 1,
-      "size": "eco"
+      "size": "free"
     }
   },
   "buildpacks": [
