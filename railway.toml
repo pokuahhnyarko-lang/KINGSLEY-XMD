@@ -2,9 +2,8 @@
 builder = "NIXPACKS"
 
 [deploy]
-startCommand = "node src/index.js"
+startCommand = "node index.js"
+healthcheckPath = "/api/healthz"
+healthcheckTimeout = 100
 restartPolicyType = "ON_FAILURE"
-restartPolicyMaxRetries = 5
-
-[[services]]
-name = "kingsley-xmd"
+restartPolicyMaxRetries = 10
