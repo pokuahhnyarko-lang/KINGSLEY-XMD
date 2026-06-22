@@ -1,10 +1,11 @@
 node_modules/
-.env
 session/
+pair-session/
+.env
 *.log
-auth_info_baileys/
-temp/
-downloads/
 *.mp3
 *.mp4
-*.zip
+*.webp
+*.tmp
+dist/
+.DS_Store
